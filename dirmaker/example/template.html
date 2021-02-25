@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{{ config.page_title.format(category=category.name) }}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="{{ config.meta_description.format(category=category.name) }}" />
+	<meta name="referrer" content="no-referrer">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="image_src" href="{{ config.base_url }}/static/thumb.png" />
+	
+	<meta property="og:title" content="{{ config.page_title.format(category=category.name) }}" />
+	<meta property="og:description" content="{{ config.meta_description.format(category=category.name) }}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="{{ config.base_url }}/{{ category | lower }}.html" />
+	<meta property="og:image" content="{{ config.base_url }}/static/thumb.png" />
+
+	<link href='https://fonts.googleapis.com/css?family=Fira+Sans:400&display=swap' rel='stylesheet' type='text/css' />
+	<link href="static/style.css" rel="stylesheet" type="text/css" />	
+</head>
+<body>
+
+<nav class="nav">
+	<div class="wrap">
+		<header class="header">
+			<a href="#" id="burger"><span></span><span></span><span></span></a>
+			<div class="logo">
+				<a href="/"><img src="static/logo.svg" alt="{{ config.site_name }}" /></a>
+				<p class="slogan">{{ config.site_description }}</p>
+			</div>
+			<div class="intro">
+				<p><input id="search" class="search" type="text" placeholder="Search this page" /></p>
+			</div>
+		</header>
+	</div>
+</nav>
+
+<div class="wrap">
+	<div class="container">
+		<section class="sidebar" id="sidebar">
+			<ul class="index">
+        {% for c in all_categories %}
+        <li class="{% if c.slug == category.slug %}selected{% endif %}">
+        	<a href="{{ c.slug }}.html">{{ c.name }} ({{ c.count }})</a>
+        </li>
+        {% endfor %}
+			</ul>
+		</section>
+
+		<section class="content">
+			{% if (taxonomies | length) > 0 %}
+				<a href="#" id="toggle-filters">Filter &rarr;</a>
+			{% endif %}
+			<section class="section" id="organisations">
+				<h3>{{ category.name }} ({{ category.count }})</h3>
+
+				<div class="filters" id="filters">
+					{% if (taxonomies | length) > 1 %}
+							{% for tx in taxonomies %}
+								<div class="group filter-{{ tx }}">
+									<h4 class="taxonomy">{{ tx }}</h4>
+									<a href="#" class="toggle-filters" data-taxonomy="{{ tx }}" data-state="on">&larr; Toggle</a>
+									{% for t in taxonomies[tx] %}
+										<label for="filter-{{ tx }}-{{ t.slug }}">
+											<input type="checkbox" id="filter-{{ tx }}-{{ t.slug }}"
+												data-taxonomy="{{ tx }}"
+												value="{{ t.slug }}" checked />{{ t.name }}
+										</label>
+									{% endfor %}
+								</div>
+							{% endfor %}
+					{% endif %}
+				</div>
+
+				<ul id="items">
+					{% for e in entries %}
+						<li class="item"
+							{% for tx in all_taxonomies %}
+								data-{{ tx }}="{% for t in e.taxonomies[tx] %}{{ t.slug }}|{% endfor %}"
+							{% endfor %}
+						>
+							<h2 class="title">
+								<a href="{{ e.url }}" rel="noreferrer noopener" class="link">{{ e.name }}</a>
+							</h2>
+							<p class="description">{{ e.description }}</p>
+
+							<div class="taxonomies">
+								{% for tx in e.taxonomies %}
+									{% if (e.taxonomies[tx] | length) > 0 %}
+										<div class="group taxonomy-{{ tx }}">
+											<span class="name">{{ tx }}</span>
+											{% for t in e.taxonomies[tx] %}
+												<span class="value">{{ t.name }}</span>
+											{% endfor %}
+
+											{% if (e.taxonomies[tx] | length) > 4 %}
+												<a href="" class="reveal" data-taxonomy="{{ tx }}">
+													&larr; View all ({{ e.taxonomies[tx] | length }})
+												</a>
+											{% endif %}
+										</div>
+									{% endif %}
+								{% endfor %}
+
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+
+				{% if pagination.total > 1 %}
+					<ul class="pagination">
+						{% for p in range(1, pagination.total + 1) %}
+							<li class="{% if pagination.current == p %}active{% endif %}">
+								<a href="{{ category.slug }}{% if p > 1 %}-{{ p }}{% endif %}.html">{{ p }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</section>
+		</section><!-- content -->
+	</div><!-- container -->
+
+	<footer>
+		Made with <a href="https://github.com/knadh/dirmaker">dirmaker</a>.
+	</footer>
+
+	<script src="static/main.js"></script>
+</div>
+</body>
+</html>

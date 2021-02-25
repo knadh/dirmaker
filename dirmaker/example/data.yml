@@ -1,0 +1,21 @@
+---
+- name: Roboto
+  description: Roboto has a dual nature. It has a mechanical skeleton and the forms are largely geometric. At the same time, the font features friendly and open curves. 
+  url: "https://www.fontsquirrel.com/fonts/roboto"
+  categories: [Professional]
+  style: [sans-serif]
+  mood: [headings, oblique, paragraph, sans, grotesque, sans, humanist]
+
+- name: Acre
+  description: Acre is a geometric sans-serif family of eight weights that’s both inspired by and named after my great grandfather, Tex Acre. 
+  url: "https://www.fontsquirrel.com/fonts/acre"
+  categories: [Professional]
+  style: [sans-serif]
+  mood: [corporate, monolinear, paragraph, sans, geometric]
+  
+- name: AnuDaw
+  description: A funky font designed by Nyek! Pinoy Komik Fonts.
+  url: https://www.fontsquirrel.com/fonts/AnuDaw
+  categories: [Funky]
+  style: [comic]
+  mood: [brush, comic, display, grunge, handwritten]

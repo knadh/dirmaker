@@ -1,0 +1,17 @@
+---
+base_url: "https://mysite.com"
+static_dir: "static"
+per_page: 50
+
+# Each entry can have multiple collection of tags (list of strings) in addition to the
+# categories. For instance, a directory of fonts could have multiple meaningful
+# tag collections per entry such as:
+# types = [serif, sans-serif, display, script]
+# mood = [retro, distressed, cool]
+# tag = [yep, nope, etc]
+taxonomies: ["style", "mood"]
+
+site_name: "My directory site"
+site_description: "My directory site"
+page_title: "{category} - Directory of cool things."
+meta_description: "Directory of {category} in cool things. "
