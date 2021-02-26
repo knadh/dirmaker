@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "dirmaker"
+version = "0.1.1"
+description = "A simple static site generator for generating directory websites."
+authors = ["Kailash Nadh <kailash@nadh.in>"]
+license = "MIT License"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+Jinja2 = "^2.11.3"
+PyYAML = "^5.4.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
