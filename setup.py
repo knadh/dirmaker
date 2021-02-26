@@ -12,7 +12,7 @@ def requirements():
 
 setup(
     name="dirmaker",
-    version="0.1.1",
+    version="0.1.2",
     description="A simple static site generator for generating directory websites.",
     long_description=README,
     long_description_content_type="text/markdown",

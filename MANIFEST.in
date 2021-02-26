@@ -1,2 +1,3 @@
 include dirmaker/example/*
 include dirmaker/example/static/*
+include requirements.txt
