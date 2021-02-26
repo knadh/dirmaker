@@ -1,14 +1,6 @@
 ![logo](https://user-images.githubusercontent.com/547147/109163952-e4610100-779f-11eb-9aa6-2236f06d3022.png)
 
-dirmaker is a simple, opinionated static site generator for publishing directory websites like [Indic.page](https://indic.page). It takes entries from a YAML file and generates a categorised, paginated directory website.
-
---------------
-Example site:
-
-[![image](https://user-images.githubusercontent.com/547147/109164159-1eca9e00-77a0-11eb-9382-4f9d35aef72a.png)](https://indic.page)
-
-
-## Usage
+dirmaker is a simple, opinionated static site generator for publishing directory websites (eg: [Indic.page](https://indic.page), [env.wiki](https://env.wiki/directory) It takes entries from a YAML file and generates a categorised, paginated directory website.
 
 ### Install 
 `pip3 install dirmaker`
