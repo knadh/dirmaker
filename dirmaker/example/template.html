@@ -54,7 +54,7 @@
 				<h3>{{ category.name }} ({{ category.count }})</h3>
 
 				<div class="filters" id="filters">
-					{% if (taxonomies | length) > 1 %}
+					{% if (taxonomies | length) > 0 %}
 							{% for tx in taxonomies %}
 								<div class="group filter-{{ tx }}">
 									<h4 class="taxonomy">{{ tx }}</h4>

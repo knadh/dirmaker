@@ -215,6 +215,30 @@ footer {
 		border-bottom: 2px solid var(--primary);
 	}
 
+.shake {
+  animation: shake 150ms cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+@keyframes shake {
+	0% {
+		scale: 1;
+	}
+	20% {
+		scale: 1.01;
+	}
+	40% {
+		scale: 1.02;
+	}
+	80% {
+		scale: 1.01;
+	}
+	100% {
+		scale: 1;
+	}
+}
+
 @media(max-width: 750px) {
 	.wrap {
 		padding: 15px;

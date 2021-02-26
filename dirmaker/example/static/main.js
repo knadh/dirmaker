@@ -25,6 +25,11 @@ function onFilter() {
 		return { taxonomy: e.dataset.taxonomy, value: e.value }
 	});
 
+	const cls = document.querySelector("#items").classList;
+	cls.remove("shake");
+	window.setTimeout(() => {
+		cls.add("shake");
+	}, 50);
 	filterList(sel, "#items .item");
 }
 
@@ -122,11 +127,9 @@ function tokenize(str) {
 
 			const cls = e.target.parentNode.classList;
 			if (cls.contains("visible")) {
-				console.log("yes", cls.contains("visible"));
 				cls.remove("visible");
 			} else {
 				cls.add("visible");
-				console.log("no", cls.contains("visible"));
 			}
 		};
 	});
