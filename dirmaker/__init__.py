@@ -65,7 +65,7 @@ class Builder:
 
     def __init__(self, config_file):
         with open(config_file, "r") as f:
-            self.config = {**self.config, **yaml.load(f.read())}
+            self.config = {**self.config, **yaml.load(f.read(), Loader=yaml.FullLoader)}
 
     def build(self, outdir):
         # Create the output diretory.
@@ -89,7 +89,7 @@ class Builder:
         """Loads entries from the YAML data file."""
         entries = []
         with open(infile, "r") as f:
-            items = yaml.load(f.read())
+            items = yaml.load(f.read(), Loader=yaml.FullLoader)
             if type(items) is not list or len(items) == 0:
                 return []
 
