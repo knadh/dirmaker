@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from codecs import open
 from setuptools import setup
+from dirmaker import __version__
 
 README = open("README.md").read()
 
@@ -12,7 +13,7 @@ def requirements():
 
 setup(
     name="dirmaker",
-    version="0.1.3",
+    version=__version__,
     description="A simple static site generator for generating directory websites.",
     long_description=README,
     long_description_content_type="text/markdown",

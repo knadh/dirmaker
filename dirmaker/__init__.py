@@ -8,9 +8,9 @@ from copy import copy
 import sys
 
 from jinja2 import Template
-
 import yaml
 
+__version__ = "1.0.0"
 
 class Taxonomy:
     def __init__(self, name, slug, count):
@@ -251,6 +251,8 @@ def main():
         description="A simple static site generator for generating directory websites.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
+    p.add_argument("-v", "--version", action="store_true", dest="version", help="display version")
+
     n = p.add_argument_group("new")
     n.add_argument("-n", "--new", action="store_true",
                    dest="new", help="initialize a new site")
@@ -268,7 +270,16 @@ def main():
                    dest="data", help="path to the data file")
     b.add_argument("-o", "--output", action="store", type=str, default="site",
                    dest="output", help="path to the output directory")
+
+    if len(sys.argv) == 1:
+        p.print_help()
+        p.exit()
+
     args = p.parse_args()
+
+    if args.version:
+        print("v{}".format(__version__))
+        quit()
 
     if args.new:
         exdir = os.path.join(os.path.dirname(__file__), "example")
