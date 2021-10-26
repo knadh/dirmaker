@@ -202,6 +202,10 @@ footer {
 		display: inline-block !important;
 	}
 
+#no-results {
+	display: none;
+	margin-top: 30px;
+}
 
 .pagination {
 	margin-top: 30px;	

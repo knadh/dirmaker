@@ -143,10 +143,13 @@ class Builder:
             # Iterate through each taxonomy array in the entry.
             for v in item[tx]:
                 if v not in out[tx]:
-                    id = v.lower()
+                    id = v.strip().lower()
+                    if id == "":
+                        continue
+
                     out[tx][id] = Taxonomy(
                         name=v, slug=self._make_slug(v), count=0)
-        for tx in self.config["taxonomies"]:
+
             out[tx] = sorted([out[tx][v]
                               for v in out[tx]], key=lambda k: k.name)
 
@@ -164,7 +167,10 @@ class Builder:
                     out[tx] = {}
 
                 for t in e.taxonomies[tx]:
-                    id = t.name.lower()
+                    id = t.name.strip().lower()
+                    if id == "":
+                        continue
+
                     if id not in out[tx]:
                         out[tx][id] = copy(t)
                     out[tx][id].count += 1

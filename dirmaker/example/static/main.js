@@ -1,12 +1,15 @@
 function filterList(sel, itemSelector) {
+	const noRes = document.querySelector("#no-results");
 	// Hide all items.
 	document.querySelectorAll(itemSelector).forEach(e => {
 		e.style.display = "none";
 	});
 
 	if (sel.length === 0) {
+		noRes.style.display = 'block';
 		return;
 	}
+	noRes.style.display = 'none';
 
 	// List of attribute selector queries for each value. eg:
 	// #items li[data-language*=malayalam|], #items li[data-language*=kannada|] ...
@@ -102,7 +105,12 @@ function tokenize(str) {
 
 			// Check or uncheck all filter checkboxes with the toggle item's dataset.taxonomy.
 			const tax = e.target.dataset.taxonomy;
-			document.querySelectorAll(`#filters input[data-taxonomy=${tax}]`).forEach(el => {
+			const filters = document.querySelectorAll(`#filters input[data-taxonomy=${tax}]`);
+			if (filters.length === 0) {
+				return;
+			}
+
+			filters.forEach(el => {
 				el.checked = e.target.dataset.state === "on" ? false : true;
 			});
 
