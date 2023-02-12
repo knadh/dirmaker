@@ -1,3 +1,13 @@
+function intersection(setA, setB) {
+	const _intersection = new Set();
+	for (const elem of setB) {
+		if (setA.has(elem)) {
+			_intersection.add(elem);
+		}
+	}
+	return _intersection;
+}
+
 function filterList(sel, itemSelector) {
 	const noRes = document.querySelector("#no-results");
 	// Hide all items.
@@ -11,12 +21,18 @@ function filterList(sel, itemSelector) {
 	}
 	noRes.style.display = 'none';
 
-	// List of attribute selector queries for each value. eg:
-	// #items li[data-language*=malayalam|], #items li[data-language*=kannada|] ...
-	const q = sel.map(v => `${itemSelector}[data-${v.taxonomy}*='${v.value}|']`);
+	let visible = new Set(document.querySelectorAll(itemSelector));
+	for (taxonomy of new Set(sel.map((e) => e.taxonomy))) {
+		// List of attribute selector queries for each value. eg:
+		// #items li[data-language*=malayalam|], #items li[data-language*=kannada|] ...
+		let q = sel.filter((e) => e.taxonomy === taxonomy).map((e) => `${itemSelector}[data-${taxonomy}*='${e.value}|']`)
+		visible = intersection(visible, new Set(document.querySelectorAll(q.join(", "))));
+
+		// const q = sel.map(v => `${itemSelector}[data-${v.taxonomy}*='${v.value}|']`);
+	}
 
 	// Show the matched items.
-	document.querySelectorAll(q.join(", ")).forEach(e => {
+	visible.forEach(e => {
 		e.style.display = "block";
 	});
 }
